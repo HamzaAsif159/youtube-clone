@@ -1,7 +1,14 @@
+import React from "react";
 import "./App.css";
 
+import PageHeader from "./layouts/PageHeader";
+
 function App() {
-  return <div>Youtube Clone</div>;
+  return (
+    <>
+      <PageHeader />
+    </>
+  );
 }
 
 export default App;
