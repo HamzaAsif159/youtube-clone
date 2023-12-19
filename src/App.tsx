@@ -1,11 +1,10 @@
 import "./App.css";
-
-import PageHeader from "./layouts/PageHeader";
+import Main from "./views/Main";
 
 function App() {
   return (
     <>
-      <PageHeader />
+      <Main />
     </>
   );
 }
