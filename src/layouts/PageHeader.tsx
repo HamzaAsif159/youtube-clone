@@ -17,7 +17,7 @@ export default function PageHeader() {
   const [showFullWidthSearch, setShowFullWidthSearch] = React.useState(false);
 
   return (
-    <div className="flex items-center justify-between gap-10 pt-1 mb-6 md:pt-2 md:mx-4 lg:gap-16">
+    <div className="flex items-center justify-between gap-10 pt-2 mb-6 md:pt-2 md:mx-4 lg:gap-16">
       {showFullWidthSearch && (
         <div className="flex flex-grow gap-1 md:hidden">
           <Button
@@ -50,7 +50,11 @@ export default function PageHeader() {
         <Button variant="ghost" size="icon">
           <FontAwesomeIcon icon={faBars} />
         </Button>
-        <img src={Logo} alt="logo" className="h-16 mt-0 -ml-2 md:-ml-1" />
+        <img
+          src={Logo}
+          alt="logo"
+          className="h-8 mt-0 -ml-2 md:h-10 md:-ml-1"
+        />
       </div>
       <form className=" gap-1 flex-grow max-w-[600px] self-center hidden md:flex">
         <div className="flex flex-grow w-full">
