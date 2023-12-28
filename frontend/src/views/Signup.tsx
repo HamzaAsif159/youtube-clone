@@ -6,9 +6,6 @@ export default function Signup() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [username, setUsername] = React.useState("");
-
-  console.log(email, password, username);
-
   const { signup, error, loading } = useSignup();
 
   const handleSubmit = async (e: any) => {

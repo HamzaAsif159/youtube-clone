@@ -7,15 +7,13 @@ import Signup from "./views/Signup";
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route element={<PrivateRoute />}>
-          <Route path="/home" element={<Main />} />
-        </Route>
-        <Route path="/" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route element={<PrivateRoute />}>
+        <Route path="/" element={<Main />} />
+      </Route>
+      <Route path="/signin" element={<Signin />} />
+      <Route path="/signup" element={<Signup />} />
+    </Routes>
   );
 }
 
