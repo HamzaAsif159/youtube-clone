@@ -10,11 +10,14 @@ export const useSignup = () => {
     setLoading(true);
     setError(null);
 
-    const response = await fetch("http://localhost:5000/user/signup", {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ username, email, password }),
-    });
+    const response = await fetch(
+      "https://youtube-clone.up.railway.app/user/signup",
+      {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ username, email, password }),
+      }
+    );
 
     const json = await response.json();
 

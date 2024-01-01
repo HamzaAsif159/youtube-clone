@@ -9,14 +9,16 @@ import {
   faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
+import { useState } from "react";
+import { useLogout } from "../hooks/useLogout";
+import { useSidebarContext } from "../context/SidebarContext";
 import YoutubeLogo from "../assets/youtubeLogo.png";
 import { Button } from "../components/Button";
-import { useState } from "react";
-import { useSidebarContext } from "../context/SidebarContext";
 
 export function PageHeader() {
   const [showFullWidthSearch, setShowFullWidthSearch] = useState(false);
   const [modal, setModal] = useState(true);
+  const logout = useLogout();
 
   return (
     <>
@@ -81,7 +83,10 @@ export function PageHeader() {
           <div className="flex items-center border border-[#EBEFFF] h-[50px] cursor-pointer p-5">
             <div>Hamzaasif@gmail.com</div>
           </div>
-          <div className="flex gap-3 items-center border border-[#EBEFFF] h-[50px] cursor-pointer p-5">
+          <div
+            className="flex gap-3 items-center border border-[#EBEFFF] h-[50px] cursor-pointer p-5"
+            onClick={logout}
+          >
             <div>Log out</div>
           </div>
         </div>
