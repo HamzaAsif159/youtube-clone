@@ -10,15 +10,22 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useState } from "react";
-import { useLogout } from "../hooks/useLogout";
 import { useSidebarContext } from "../context/SidebarContext";
 import YoutubeLogo from "../assets/youtubeLogo.png";
 import { Button } from "../components/Button";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { toastify } from "../common/toastify";
 
 export function PageHeader() {
   const [showFullWidthSearch, setShowFullWidthSearch] = useState(false);
-  const [modal, setModal] = useState(true);
-  const logout = useLogout();
+  const [modal, setModal] = useState(false);
+  const { logout, user } = useAuthContext();
+
+  function handleLogout() {
+    logout();
+    setModal(!modal);
+    toastify("success", "Logged out successfully");
+  }
 
   return (
     <>
@@ -78,14 +85,14 @@ export function PageHeader() {
           </Button>
         </div>
       </div>
-      {!modal && (
+      {modal && (
         <div className="bg-[#F5F7F8] absolute top-[49px] right-6 max-w-[200px] flex flex-col z-50 font-normal">
           <div className="flex items-center border border-[#EBEFFF] h-[50px] cursor-pointer p-5">
-            <div>Hamzaasif@gmail.com</div>
+            <div>{user?.user?.email}</div>
           </div>
           <div
             className="flex gap-3 items-center border border-[#EBEFFF] h-[50px] cursor-pointer p-5"
-            onClick={logout}
+            onClick={handleLogout}
           >
             <div>Log out</div>
           </div>

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { ToastContainer } from "react-toastify";
 
 import { CategoryTag } from "../components/CategoryTag";
 import { categories, videos } from "../data/home";
@@ -35,7 +34,6 @@ export default function App() {
           </div>
         </div>
       </SidebarProvider>
-      <ToastContainer />
     </>
   );
 }

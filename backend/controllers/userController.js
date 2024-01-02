@@ -5,7 +5,7 @@ function createToken(_id) {
   return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "1d" });
 }
 
-async function signupUser(req, res) {
+async function signupUser(req, res, next) {
   const { email, password, username } = req.body;
 
   try {
@@ -13,11 +13,11 @@ async function signupUser(req, res) {
     const token = createToken(user._id);
     res.status(200).json({ user, token });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    next(error);
   }
 }
 
-async function loginUser(req, res) {
+async function loginUser(req, res, next) {
   const { email, password } = req.body;
 
   try {
@@ -25,7 +25,7 @@ async function loginUser(req, res) {
     const token = createToken(user._id);
     res.status(200).json({ user, token });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    next(error);
   }
 }
 

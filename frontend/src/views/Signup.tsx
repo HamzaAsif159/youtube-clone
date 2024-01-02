@@ -1,17 +1,27 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { useSignup } from "../hooks/useSignup";
+import { useNavigate } from "react-router-dom";
+
+import { toastify } from "../common/toastify";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function Signup() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [username, setUsername] = React.useState("");
-  const { signup, error, loading } = useSignup();
+  const { signup } = useAuthContext();
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await signup(username, email, password);
+    try {
+      await signup(username, email, password);
+      toastify("success", "Successfully signed up");
+      navigate("/");
+    } catch (error: any) {
+      toastify("error", error?.message);
+    }
   };
 
   return (
@@ -76,7 +86,6 @@ export default function Signup() {
                 required
               />
             </div>
-            {error && <div className="text-red-500">{error}</div>}
             <button
               type="submit"
               className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
