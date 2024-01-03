@@ -7,6 +7,7 @@ import {
   faBell,
   faUser,
   faArrowLeft,
+  faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useState } from "react";
@@ -86,14 +87,23 @@ export function PageHeader() {
         </div>
       </div>
       {modal && (
-        <div className="bg-[#F5F7F8] absolute top-[49px] right-6 max-w-[200px] flex flex-col z-50 font-normal">
-          <div className="flex items-center border border-[#EBEFFF] h-[50px] cursor-pointer p-5">
-            <div>{user?.user?.email}</div>
+        <div className="bg-[#F5F7F8] absolute top-[49px] right-6 max-w-[350px] flex flex-col z-50 font-normal">
+          <div className="flex gap-1 items-center border border-[#EBEFFF] h-[50px] cursor-pointer p-5">
+            <Button size="icon" variant="ghost">
+              <FontAwesomeIcon icon={faUser} />
+            </Button>
+            <div className="flex flex-col">
+              <div>{user?.user?.username}</div>
+              <div className="text-sm font-light">{user?.user?.email}</div>
+            </div>
           </div>
           <div
-            className="flex gap-3 items-center border border-[#EBEFFF] h-[50px] cursor-pointer p-5"
+            className="flex gap-1 items-center border border-[#EBEFFF] h-[50px] cursor-pointer p-5"
             onClick={handleLogout}
           >
+            <Button size="icon" variant="ghost">
+              <FontAwesomeIcon icon={faArrowRightFromBracket} />
+            </Button>
             <div>Log out</div>
           </div>
         </div>

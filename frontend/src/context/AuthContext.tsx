@@ -1,4 +1,6 @@
+import axios, { AxiosError } from "axios";
 import { createContext, useState, ReactNode } from "react";
+import { userInstance } from "../common/axiosInstance";
 
 type User = {
   username: string;
@@ -13,15 +15,10 @@ type AuthResponse = {
 
 export const AuthContext = createContext<{
   user: AuthResponse | null;
-  signin: (email: string, password: string) => void;
-  signup: (username: string, email: string, password: string) => void;
+  signin: (email: string, password: string) => Promise<void>;
+  signup: (username: string, email: string, password: string) => Promise<void>;
   logout: () => void;
-}>({
-  user: null,
-  signin: () => {},
-  signup: () => {},
-  logout: () => {},
-});
+} | null>(null);
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<AuthResponse | null>(() => {
@@ -30,48 +27,29 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     return user ? (JSON.parse(user) as AuthResponse) : null;
   });
 
-  const signin = async (email: string, password: string) => {
-    const response = await fetch(
-      "https://youtube-clone.up.railway.app/user/login",
-      {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      }
-    );
+  const signin = async (email: string, password: string): Promise<void> => {
+    const response = await userInstance.post<AuthResponse>("/user/login", {
+      email,
+      password,
+    });
 
-    const json: AuthResponse = await response.json();
+    const data = response?.data;
 
-    if (!response.ok && "message" in json) {
-      throw new Error(json?.message as string);
-    }
-
-    if (response.ok) {
-      localStorage.setItem("user", JSON.stringify(json));
-      setUser(json);
-    }
+    localStorage.setItem("user", JSON.stringify(data));
+    setUser(data);
   };
 
   const signup = async (username: string, email: string, password: string) => {
-    const response = await fetch(
-      "https://youtube-clone.up.railway.app/user/signup",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
-      }
-    );
+    const response = await userInstance.post<AuthResponse>("/user/signup", {
+      username,
+      email,
+      password,
+    });
 
-    const json = await response.json();
+    const data = response?.data;
 
-    if (!response.ok) {
-      throw new Error(json?.message);
-    }
-
-    if (response.ok) {
-      localStorage.setItem("user", JSON.stringify(json));
-      setUser(json);
-    }
+    localStorage.setItem("user", JSON.stringify(data));
+    setUser(data);
   };
 
   const logout = () => {

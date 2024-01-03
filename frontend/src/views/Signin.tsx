@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { toastify } from "../common/toastify";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { isAxiosError } from "axios";
 
 export default function Signin() {
   const [email, setEmail] = useState("");
@@ -18,7 +19,9 @@ export default function Signin() {
       toastify("success", "Successfully logged in");
       navigate("/");
     } catch (error: any) {
-      toastify("error", error?.message);
+      if (isAxiosError(error)) {
+        toastify("error", error?.response?.data?.message);
+      }
     }
   }
 
