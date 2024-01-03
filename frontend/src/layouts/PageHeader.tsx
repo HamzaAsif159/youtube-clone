@@ -122,11 +122,7 @@ export function PageHeaderFirstSection({
   const { toggle } = useSidebarContext();
 
   return (
-    <div
-      className={`gap-4 items-center flex-shrink-0 ${
-        hidden ? "hidden" : "flex"
-      }`}
-    >
+    <div className={`items-center flex-shrink-0 ${hidden ? "hidden" : "flex"}`}>
       <Button onClick={toggle} variant="ghost" size="icon">
         <FontAwesomeIcon icon={faBars} />
       </Button>

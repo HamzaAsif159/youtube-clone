@@ -17,7 +17,7 @@ export default function App() {
           <PageHeader />
           <div className="grid grid-cols-[auto,1fr] flex-grow-1 overflow-auto">
             <Sidebar />
-            <div className="px-8 pb-4 overflow-x-hidden">
+            <div className="px-4 pb-4 overflow-x-hidden md:px-8">
               <div className="sticky top-0 z-10 pb-4 bg-white">
                 <CategoryTag
                   categories={categories}
