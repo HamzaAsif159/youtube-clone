@@ -1,4 +1,3 @@
-import axios, { AxiosError } from "axios";
 import { createContext, useState, ReactNode } from "react";
 import { userInstance } from "../common/axiosInstance";
 
