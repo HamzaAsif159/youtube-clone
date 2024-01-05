@@ -31,25 +31,31 @@ import { useSidebarContext } from "../context/SidebarContext";
 import { PageHeaderFirstSection } from "./PageHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export function Sidebar() {
+type SidebarProps = {
+  smallSideBar?: boolean;
+};
+
+export function Sidebar({ smallSideBar = true }: SidebarProps) {
   const { isLargeOpen, isSmallOpen, close } = useSidebarContext();
 
   return (
     <>
-      <aside
-        className={`hidden sticky top-0 overflow-y-auto scrollbar-hidden pb-4 md:flex flex-col ml-1 ${
-          isLargeOpen ? "lg:hidden" : "lg:flex"
-        }`}
-      >
-        <SmallSidebarItem Icon={faHouse} title="Home" url="/" />
-        <SmallSidebarItem Icon={faRepeat} title="Shorts" url="/shorts" />
-        <SmallSidebarItem
-          Icon={faClapperboard}
-          title="Subscriptions"
-          url="/subscriptions"
-        />
-        <SmallSidebarItem Icon={faBookmark} title="Library" url="/library" />
-      </aside>
+      {smallSideBar && (
+        <aside
+          className={`hidden sticky top-0 overflow-y-auto scrollbar-hidden pb-4 md:flex flex-col ml-1 ${
+            isLargeOpen ? "lg:hidden" : "lg:flex"
+          }`}
+        >
+          <SmallSidebarItem Icon={faHouse} title="Home" url="/" />
+          <SmallSidebarItem Icon={faRepeat} title="Shorts" url="/shorts" />
+          <SmallSidebarItem
+            Icon={faClapperboard}
+            title="Subscriptions"
+            url="/subscriptions"
+          />
+          <SmallSidebarItem Icon={faBookmark} title="Library" url="/library" />
+        </aside>
+      )}
       {isSmallOpen && (
         <div
           onClick={close}

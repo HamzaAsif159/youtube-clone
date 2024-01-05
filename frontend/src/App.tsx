@@ -6,6 +6,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 import Main from "./views/Main";
 import Signin from "./views/Signin";
 import Signup from "./views/Signup";
+import Watch from "./views/Watch";
 import { useAuthContext } from "./hooks/useAuthContext";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
     <Routes>
       <Route element={<PrivateRoute />}>
         <Route path="/" element={<Main />} />
+        <Route path="/watch" element={<Watch />} />
       </Route>
       <Route element={user ? <Navigate to="/" /> : <Outlet />}>
         <Route path="/signin" element={<Signin />} />
