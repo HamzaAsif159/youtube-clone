@@ -15,13 +15,14 @@ type VideoItemProps = {
   duration: number;
   thumbnailUrl: string;
   videoUrl: string;
+  onClick?: () => void;
 };
 
 const VIEW_FORMATTER = new Intl.NumberFormat(undefined, {
   notation: "compact",
 });
 
-export function VideoGridItem({
+export function VideoItem({
   id,
   title,
   channel,
@@ -30,6 +31,7 @@ export function VideoGridItem({
   duration,
   thumbnailUrl,
   videoUrl,
+  onClick,
 }: VideoItemProps) {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -48,10 +50,11 @@ export function VideoGridItem({
   return (
     <div
       className="flex flex-col gap-2"
+      onClick={onClick}
       onMouseEnter={() => setIsVideoPlaying(true)}
       onMouseLeave={() => setIsVideoPlaying(false)}
     >
-      <a href={`/watch?v=${id}`} className="relative aspect-video">
+      <div className="relative aspect-video">
         <img
           src={thumbnailUrl}
           className={`block w-full h-full object-cover transition-[border-radius] duration-200 ${
@@ -70,7 +73,7 @@ export function VideoGridItem({
           playsInline
           src={videoUrl}
         />
-      </a>
+      </div>
       <div className="flex gap-2">
         <a href={`/@${channel.id}`} className="flex-shrink-0">
           <img className="w-12 h-12 rounded-full" src={channel.profileUrl} />

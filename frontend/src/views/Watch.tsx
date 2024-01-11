@@ -13,7 +13,7 @@ export default function Watch() {
           <PageHeader />
           <div className="lg:flex">
             <div className="min-w-[225px]">
-              <Sidebar smallSideBar={false} />
+              <Sidebar smallSideBar={false} largeSideBar={false} />
             </div>
             <div className="w-full md:grid grid-cols-[1fr,auto] flex-grow-1 overflow-auto lg:w-[60%]">
               <div className="w-full aspect-video">
@@ -25,6 +25,7 @@ export default function Watch() {
                 <SuggestedVideoItem key={video.id} {...video} />
               ))}
             </div>
+            <div>Hello</div>
           </div>
         </div>
       </SidebarProvider>

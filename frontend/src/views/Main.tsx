@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { CategoryTag } from "../components/CategoryTag";
 import { categories, videos } from "../data/home";
 import { PageHeader } from "../layouts/PageHeader";
-import { VideoGridItem } from "../components/VideoItem";
+import { VideoItem } from "../components/VideoItem";
 import { Sidebar } from "../layouts/Sidebar";
 import { SidebarProvider } from "../context/SidebarContext";
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -27,7 +29,11 @@ export default function App() {
               </div>
               <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
                 {videos.map((video) => (
-                  <VideoGridItem key={video.id} {...video} />
+                  <VideoItem
+                    key={video.id}
+                    {...video}
+                    onClick={() => navigate("/watch")}
+                  />
                 ))}
               </div>
             </div>

@@ -34,9 +34,7 @@ export function SuggestedVideoItem({
         className="max-w-[150px] max-h-[100px] lg:max-w-[150px] lg:max-h-[200px] object-cover rounded-lg"
       />
       <div className="flex flex-col justify-evenly">
-        <div className="overflow-hidden text-base lg:text-lg font-medium leading-6 text-ellipsis lg:w-[200px]">
-          {title}
-        </div>
+        <div className=" textEllipsis">{title}</div>
         <div className="text-secondary-text">
           <div className="mb-2 text-xs font-medium">{channel.name}</div>
           <div className="flex gap-3 text-xs md:text-sm">
