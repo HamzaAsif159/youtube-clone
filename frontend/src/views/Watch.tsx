@@ -25,7 +25,6 @@ export default function Watch() {
                 <SuggestedVideoItem key={video.id} {...video} />
               ))}
             </div>
-            <div>Hello</div>
           </div>
         </div>
       </SidebarProvider>
